@@ -2,11 +2,16 @@ package cn.itcast.elec.dao.impl;
 
 import cn.itcast.elec.dao.ICommonDao;
 import cn.itcast.elec.util.GenericTypeUtils;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -70,9 +75,9 @@ public class CommonDaoImpl<T> extends HibernateDaoSupport implements ICommonDao<
 		String orderbyhql = this.orderby(orderby);
 		final String finalHql = hql + condition + orderbyhql;
 		//方式一
-		List<T> list = this.getHibernateTemplate().find(finalHql, params);
+		/*List<T> list = (List<T>) this.getHibernateTemplate().find(finalHql, params);*/
 		//方式二，使用hibernate模板提供的回调函数，回调Session
-		/*List<T> list = (List<T>) this.getHibernateTemplate().execute(new HibernateCallback() {
+		List<T> list = (List<T>) this.getHibernateTemplate().execute(new HibernateCallback<Object>() {
 
 			@Override public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
@@ -84,7 +89,7 @@ public class CommonDaoImpl<T> extends HibernateDaoSupport implements ICommonDao<
 				}
 				return query.list();
 			}
-		});*/
+		});
 		return list;
 	}
 
