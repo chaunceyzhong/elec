@@ -212,7 +212,7 @@
 
                             </td>
                         </tr>
-                        <input type="hidden" name="roleID">
+                        <input type="hidden" name="roleID"/>
                     </table>
                 </fieldset>
             </td>

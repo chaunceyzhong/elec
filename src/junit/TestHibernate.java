@@ -1,9 +1,6 @@
-package junit;
 
-
-
-import cn.itcast.elec.domain.ElecRole;
-import cn.itcast.elec.domain.ElecUser;
+import cn.itcast.elec.domain.Stock;
+import cn.itcast.elec.domain.StockItem;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,15 +18,13 @@ public class TestHibernate {
 		SessionFactory sf = configuration.buildSessionFactory();
 		Session s = sf.openSession();
 		Transaction tr = s.beginTransaction();
-
-		ElecUser user = new ElecUser();
-		user.setUserName("张三");
-		ElecRole role = new ElecRole();
-		role.setRoleID("100");
-		role.setRoleName("老师");
-        user.getElecRoles().add(role);
-        s.save(user);
-		tr.commit();
+        Stock stock = new Stock();
+        StockItem stockItem = new StockItem();
+        stock.getStockItems().add(stockItem);
+        //stockItem.setStock(stock);
+        s.save(stock);
+        s.save(stockItem);
+        tr.commit();
 		s.close();
 		
 	}

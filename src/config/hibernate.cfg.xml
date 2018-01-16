@@ -33,6 +33,8 @@
 		<mapping resource="cn/itcast/elec/domain/ElecRole.hbm.xml"/>
 		<mapping resource="cn/itcast/elec/domain/ElecPopedom.hbm.xml"/>
 		<mapping resource="cn/itcast/elec/domain/ElecRolePopedom.hbm.xml"/>
+		<mapping resource="cn/itcast/elec/domain/Stock.hbm.xml"/>
+		<mapping resource="cn/itcast/elec/domain/StockItem.hbm.xml"/>
 
 
 		<!--指定使用二级缓存的类 放在mapping下面-->

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.itcast.elec.domain.StockItem" table="stockitem">
+        <id name="item_id" type="string" column="item_id">
+            <generator class="uuid"></generator>
+        </id>
+
+      <many-to-one name="stock" class="cn.itcast.elec.domain.Stock">
+          <column name="stock_id"></column>
+      </many-to-one>
+
+    </class>
+
+</hibernate-mapping>
