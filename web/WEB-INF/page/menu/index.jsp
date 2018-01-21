@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java"  pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -58,14 +59,15 @@ FORM {
 						<td height="313" width="73%"></td>
 						<td height="99" width="27%">
 							<table border="0" width="70%" id="table4">
+								<tr><s:fielderror cssStyle="color: #ffffff"/></tr>
 								<tr>
 									<td width="100"><img border="0" src="${pageContext.request.contextPath}/images/yonghu.jpg" width="75" height="20"></td>
-									<td><input type="text" name="name" style="width: 125 px" size="20" value=""  maxlength="25"></td>
+									<td><input type="text" name="name" style="width: 125 px" size="20" value=""  maxlength="25" /></td>
 	
 								</tr>
 								<tr>
 									<td width="100"><img border="0" src="${pageContext.request.contextPath}/images/mima.jpg" width="75" height="20"></td>
-									<td><input type="password" name="password" style="width: 125 px" size="20" value=""  maxlength="25"></td>
+									<td><input type="password" name="password" style="width: 125 px" size="20" value=""  maxlength="25"/></td>
 									
 								</tr>
 								<!-- 

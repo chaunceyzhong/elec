@@ -6,6 +6,7 @@ import cn.itcast.elec.domain.ElecUser;
 import cn.itcast.elec.service.IElecUserService;
 import cn.itcast.elec.util.MD5keyBean;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -159,6 +160,47 @@ public class ElecUserServiceImpl implements IElecUserService {
         }
         //最后讲加密后的密码放置到ElecUser中.
         elecUser.setLogonPwd(md5LogonPwd);
+    }
+
+    @Transactional(isolation=Isolation.DEFAULT,propagation=Propagation.REQUIRED,readOnly=false)
+    @Override public ElecUser findElecUserByLogonName(String logonName) {
+        String condition = "";
+        List<Object> paramsList = new ArrayList<>();
+        if(StringUtils.isNotBlank(logonName)){
+            condition += " and o.logonName=?";
+            paramsList.add(logonName);
+        }
+        Object [] params = paramsList.toArray();
+        //查询
+        List<ElecUser> list = elecUserDao.findCollectionByConditionNoPage(condition, params, null);
+        ElecUser elecUser = null;
+        if(list!=null && list.size()>0){
+            elecUser = list.get(0);
+            //方案一：
+            //			elecUser.getElecRoles().size();
+            //方法二：
+           Hibernate.initialize(elecUser.getElecRoles());
+        }
+        return elecUser;
+    }
+
+    /**
+     * 根据用户名返回用户权限
+     *
+     * @param name
+     * @return
+     */
+    @Override public String findPopedomByLogonName(String name) {
+        List<Object> list = elecUserDao.findPopedomByLogonName(name);
+        StringBuffer buffer = new StringBuffer();
+        if(list!=null && list.size()>0){
+            for(Object o:list){
+                buffer.append(o.toString()).append("@");
+            }
+            //删除最后一个@
+            buffer.deleteCharAt(buffer.length()-1);
+        }
+        return buffer.toString();
     }
 
 
