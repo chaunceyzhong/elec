@@ -20,4 +20,13 @@ public interface IElecUserService {
     ElecUser findElecUserByID(ElecUser elecUser);
 
     void deleteUserByIds(ElecUser elecUser);
+
+    ElecUser findElecUserByLogonName(String logonName);
+
+    /**
+     * 根据用户名返回用户权限
+     * @param name
+     * @return
+     */
+    String findPopedomByLogonName(String name);
 }
