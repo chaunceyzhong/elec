@@ -62,15 +62,15 @@ FORM {
 								<tr><s:fielderror cssStyle="color: #ffffff"/></tr>
 								<tr>
 									<td width="100"><img border="0" src="${pageContext.request.contextPath}/images/yonghu.jpg" width="75" height="20"></td>
-									<td><input type="text" name="name" style="width: 125 px" size="20" value=""  maxlength="25" /></td>
+									<td><input type="text" name="name" style="width: 125px" size="20" value="${requestScope.name}"  maxlength="25" /></td>
 	
 								</tr>
 								<tr>
 									<td width="100"><img border="0" src="${pageContext.request.contextPath}/images/mima.jpg" width="75" height="20"></td>
-									<td><input type="password" name="password" style="width: 125 px" size="20" value=""  maxlength="25"/></td>
+									<td><input type="password" name="password" style="width: 125px" size="20" value="${requestScope.password}"  maxlength="25"/></td>
 									
 								</tr>
-								<!-- 
+
 								<tr>
 									<td width="100"><img border="0" src="${pageContext.request.contextPath}/images/check.jpg" width="75" height="20"></td>
 									<td>
@@ -89,10 +89,9 @@ FORM {
 								<tr>
 									<td width="100"><img border="0" src="${pageContext.request.contextPath}/images/remeber.jpg" width="75" height="20"></td>
 									<td>
-										<input type="checkbox" name="remeberMe" id="remeberMe" value="yes"/>
+										<input type="checkbox" name="remeberMe" id="remeberMe" value="yes" ${requestScope.checked}/>
 									</td>
 								</tr>
-								-->
 								<tr>
 									<td width="100"></td>
 									<td width="100"><input type="button" class=btn_mouseout onmouseover="this.className='btn_mouseover'" onmouseout="this.className='btn_mouseout'" value="登   录" name="huifubtn" onclick="checkFunction()"></td>

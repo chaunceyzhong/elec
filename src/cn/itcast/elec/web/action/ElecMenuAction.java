@@ -5,6 +5,7 @@ import cn.itcast.elec.domain.ElecRole;
 import cn.itcast.elec.domain.ElecUser;
 import cn.itcast.elec.service.IElecCommonMsgService;
 import cn.itcast.elec.service.IElecUserService;
+import cn.itcast.elec.util.LogonUtils;
 import cn.itcast.elec.util.MD5keyBean;
 import cn.itcast.elec.util.ValueStackUtils;
 import cn.itcast.elec.web.form.MenuForm;
@@ -35,6 +36,12 @@ public class ElecMenuAction extends BaseAction<MenuForm> {
     /**系统登录*/
     public String menuHome(){
 
+        //添加验证码
+        boolean flag = LogonUtils.checkNumber(request);
+        if(!flag){
+            this.addFieldError("error", "验证码有误！");
+            return "error";
+        }
         //1.验证登录密码是否正确
         String name = menuForm.getName();
         String password = menuForm.getPassword();
@@ -74,8 +81,11 @@ public class ElecMenuAction extends BaseAction<MenuForm> {
             this.addFieldError("error", "登录名具有的角色没有分配权限！");
             return "error";
         }
+        //添加【记住我】功能
+        LogonUtils.rememberMe(request,response,name,password);
         request.getSession().setAttribute("globle_user", elecUser);
         request.getSession().setAttribute("globle_role", ht);
+        request.getSession().setAttribute("globle_popedom", popedom);
         return "menuHome";
     }
 
