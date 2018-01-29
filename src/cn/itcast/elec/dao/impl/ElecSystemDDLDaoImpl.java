@@ -23,7 +23,7 @@ public class ElecSystemDDLDaoImpl extends CommonDaoImpl<ElecSystemDDL> implement
         //结果集
         List<ElecSystemDDL> sysList = new ArrayList<>();
         String hql = "SELECT DISTINCT o.keyword FROM ElecSystemDDL o";
-        List<Object> list = this.getHibernateTemplate().find(hql);
+        List<Object> list = (List<Object>) this.getHibernateTemplate().find(hql);
         //遍历
         if(list!=null && list.size()>0){
             for(Object o:list){
@@ -37,7 +37,7 @@ public class ElecSystemDDLDaoImpl extends CommonDaoImpl<ElecSystemDDL> implement
         return sysList;
     }
 
-    public String findDdlNameByKeywordAndDdlCode(final String keyword, final String ddlCode) {
+    @Override public String findDdlNameByKeywordAndDdlCode(final String keyword, final String ddlCode) {
         final String hql = "select o.ddlName from ElecSystemDDL o where o.keyword = ? and o.ddlCode = ?";
         List<Object> list =(List<Object>)this.getHibernateTemplate().execute(new HibernateCallback() {
 
