@@ -46,4 +46,10 @@
 	</aop:config>
 	-->
 
+	<!-- 6:配置工作流的流程引擎 -->
+	<bean id="springHelper" class="org.jbpm.pvm.internal.processengine.SpringHelper">
+		<property name="jbpmCfg" value="jbpm.cfg.xml"></property>
+	</bean>
+	<bean id="processEngine" factory-bean="springHelper" factory-method="createProcessEngine"></bean>
+
 </beans>
