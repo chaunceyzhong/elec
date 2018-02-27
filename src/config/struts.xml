@@ -75,4 +75,20 @@
             </result>
         </action>
     </package>
+    <package name="workflow" namespace="/workflow" extends="system">
+        <action name="elecProcessDefinitionAction_*" class="elecProcessDefinitionAction" method="{1}">
+             <result name="home">/WEB-INF/page/workflow/processDefinitionList.jsp</result>
+            <result name="add">/WEB-INF/page/workflow/processDefinitionAdd.jsp</result>
+            <result name="delete" type="redirectAction">
+                <param name="actionName">elecProcessDefinitionAction_home.do</param>
+            </result>
+            <result name="downloadProcessImage" type="stream">
+                <param name="contentType">image/png</param>
+                <!--使用inputName输出值栈中流的值-->
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">inline</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+    </package>
 </struts>

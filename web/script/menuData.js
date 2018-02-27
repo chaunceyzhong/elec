@@ -155,7 +155,7 @@ var privilegeDate = [{
 			name:'审批流程管理',
 			target:'mainFrame',
 			icon:'../images/MenuIcon/shenpiliuchengguanli.gif',
-			url:'../workflow/processDefinitionList.jsp',
+			url:'../workflow/elecProcessDefinitionAction_home.do',
 			isParent:false
 		},{
 			mid:'at',

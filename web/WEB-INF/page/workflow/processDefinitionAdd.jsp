@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<%@taglib uri="/struts-tags" prefix="s"%>
 <html>
 <head>
 	<title>部署流程定义</title>
@@ -46,7 +47,7 @@
 						请选择流程定义文档(zip格式):
 					</td>
 					<td width="80%" align="left">
-						<input type="file" name="upload" id="upload" style="width:450px;" /> *
+						<s:file name="upload" id="upload" cssStyle="width:450px;"></s:file>*
 					</td>
 					<td width="1%"></td>
 				</tr>
@@ -73,4 +74,3 @@
 
 </body>
 </html>
-	

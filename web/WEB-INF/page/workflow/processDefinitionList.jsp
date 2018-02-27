@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
     <title>审批流程管理</title>
@@ -9,6 +10,7 @@
     	function returnMethod(name,key,id){
     		var flag = window.confirm("你确定要删除  "+name+"吗？");
     		if(flag){
+                key = encodeURI(key,"UTF-8");
     			$("#"+id).attr("href","elecProcessDefinitionAction_delete.do?key="+key); 
     			return true;
     		}
@@ -18,13 +20,14 @@
     	}
     	
     	function openFunction(id){
+            id = encodeURI(id,"UTF-8");
     		openWindow('${pageContext.request.contextPath }/workflow/elecProcessDefinitionAction_downloadProcessImage.do?id='+id,'700','400');
     	}
     </script> 
 </head>
 <body>
 
-	<form id="Form1" name="Form1" action="${pageContext.request.contextPath }/WEB-INF/page/workflow/processDefinitionList.jsp" method="post" style="margin:0px;">
+	<form id="Form1" name="Form1" action="${pageContext.request.contextPath }/workflow/elecProcessDefinitionAction_home.do" method="post" style="margin:0px;">
 		<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
 			<TR height=10><td></td></TR>
 			<tr>
@@ -49,10 +52,10 @@
 			             </TABLE>
                     </td>
 					<td class="ta_01" align="right">
-						<input style="font-size:12px; color:black; height=20;width=80" id="BT_Flush" type="button" value="刷新" name="BT_Flush" 
+						<input style="font-size:12px; color:black; height:20px;width:80px" id="BT_Flush" type="button" value="刷新" name="BT_Flush"
 						 onclick="document.Form1.submit();">&nbsp;&nbsp;
 					    <input style="font-size:12px; color:black; height=20;width=120" id="BT_Add" type="button" value="部署流程定义文档" name="BT_Add" 
-						 onclick="openWindow('${pageContext.request.contextPath }/workflow/processDefinitionAdd.jsp','700','400')">
+						 onclick="openWindow('${pageContext.request.contextPath }/workflow/elecProcessDefinitionAction_add.do','700','400')">
 					</td>
 				</tr>
 				<tr>
@@ -73,45 +76,29 @@
 								<td width="10%" align="center" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">删除</td>
 								<td width="10%" align="center" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">查看流程图</td>
 							</tr>
+							<s:if test="#request.list!=null && #request.list.size()>0">
+								<s:iterator value="#request.list" var="pd">
 									<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 										<td style="HEIGHT:22px" align="center" width="30%">
-											设备购置计划流程
+											<s:property value="#pd.name"/>
 										</td>
 										<td style="HEIGHT:22px" align="center" width="30%">
-											1
+											<s:property value="#pd.version"/>
 										</td>
 										<td style="HEIGHT:22px" align="center" width="20%">
-											
+											<s:property value="#pd.description"/>
 										</td>
 										<td style="HEIGHT:22px" align="center" width="10%">
-											<a id="设备购置计划流程-1" href="#" onclick="returnMethod('设备购置计划流程','设备购置计划流程','设备购置计划流程-1')">
-											<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="CURSOR:hand"></a>												
+											<a id="<s:property value="#pd.id"/>" href="#" onclick="returnMethod('<s:property value="#pd.name"/>','<s:property value="#pd.key"/>','<s:property value="#pd.id"/>')">
+											<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="CURSOR:hand"></a>
 										</td>
 										<td style="HEIGHT:22px" align="center" width="10%">
-											<a href="#" onclick="openFunction('设备购置计划流程-1')">
-										   <img src="${pageContext.request.contextPath }/images/button_view.gif" border="0" style="CURSOR:hand"></a>													
+											<a href="#" onclick="openFunction('<s:property value="#pd.id"/>')">
+												<img src="${pageContext.request.contextPath }/images/button_view.gif" border="0" style="CURSOR:hand"></a>
 										</td>
 									</tr>
-								
-									<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-										<td style="HEIGHT:22px" align="center" width="30%">
-											设备费用报销流程
-										</td>
-										<td style="HEIGHT:22px" align="center" width="30%">
-											1
-										</td>
-										<td style="HEIGHT:22px" align="center" width="20%">
-											
-										</td>
-										<td style="HEIGHT:22px" align="center" width="10%">
-											<a id="设备费用报销流程-1" href="#" onclick="returnMethod('设备费用报销流程','设备费用报销流程','设备费用报销流程-1')">
-											<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="CURSOR:hand"></a>												
-										</td>
-										<td style="HEIGHT:22px" align="center" width="10%">
-											<a href="#" onclick="openFunction('设备费用报销流程-1')">
-										   <img src="${pageContext.request.contextPath }/images/button_view.gif" border="0" style="CURSOR:hand"></a>													
-										</td>
-									</tr>
+								</s:iterator>
+							</s:if>
 						</table>		
 					</td>
 				</tr>     
