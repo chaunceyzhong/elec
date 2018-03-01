@@ -35,6 +35,9 @@
 		<mapping resource="cn/itcast/elec/domain/ElecRolePopedom.hbm.xml"/>
 		<mapping resource="cn/itcast/elec/domain/Stock.hbm.xml"/>
 		<mapping resource="cn/itcast/elec/domain/StockItem.hbm.xml"/>
+		<mapping resource="cn/itcast/elec/domain/ElecApplicationTemplate.hbm.xml"/>
+		<mapping resource="cn/itcast/elec/domain/ElecApplication.hbm.xml"/>
+		<mapping resource="cn/itcast/elec/domain/ElecApproveInfo.hbm.xml"/>
 
 		<!-- 添加jbpm的映射配置 -->
 		<mapping resource="jbpm.repository.hbm.xml" />

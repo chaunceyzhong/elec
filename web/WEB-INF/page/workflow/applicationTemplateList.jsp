@@ -1,22 +1,23 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<%@taglib uri="/struts-tags" prefix="s"%>
 <html>
 <head>
     <title>模板管理</title>
     <LINK href="${pageContext.request.contextPath }/css/Style.css" type="text/css" rel="stylesheet">
 	<script language="javascript" src="${pageContext.request.contextPath }/script/function.js"></script>
     <script type="text/javascript">
-		function returnMethod(){
-			return confirm("你确定要删除  XXXXX模板吗？");
+		function returnMethod(name){
+			return confirm("你确定要删除 "+name+"吗？");
 		}
     </script> 
 </head>
 <body>
 
-	<form id="Form1" name="Form1" action="${pageContext.request.contextPath }/WEB-INF/page/workflow/applicationTemplateList.jsp" method="post" style="margin:0px;">
+	<form id="Form1" name="Form1" action="${pageContext.request.contextPath }/workflow/elecApplicationTemplateAction_home.do" method="post" style="margin:0px;">
 		<table cellspacing="1" cellpadding="0" width="90%" align="center" bgcolor="#f5fafe" border="0">
 			<TR height=10><td></td></TR>
 			<tr>
-				<td class="ta_01" colspan=2 align="center" background="../../../images/b-info.gif">
+				<td class="ta_01" colspan=2 align="center" background="../images/b-info.gif">
 					<font face="宋体" size="2"><strong>模板管理</strong></font>
 				</td>
 				
@@ -39,10 +40,10 @@
 			             </TABLE>
                     </td>
 					<td class="ta_01" align="right">
-						<input style="font-size:12px; color:black; height=20;width=80" id="BT_Flush" type="button" value="刷新" name="BT_Flush" 
+						<input style="font-size:12px; color:black; height:20px;width:80px" id="BT_Flush" type="button" value="刷新" name="BT_Flush"
 						 onclick="document.Form1.submit();">&nbsp;&nbsp;
-					    <input style="font-size:12px; color:black; height=20;width=120" id="BT_Add" type="button" value="新增模板" name="BT_Add" 
-						 onclick="openWindow('${pageContext.request.contextPath }/workflow/applicationTemplateAdd.jsp','700','400')">
+					    <input style="font-size:12px; color:black; height:20px;width:120px" id="BT_Add" type="button" value="新增模板" name="BT_Add"
+						 onclick="openWindow('${pageContext.request.contextPath }/workflow/elecApplicationTemplateAction_add.do','700','400')">
 					</td>
 				</tr>
 				<tr>
@@ -63,47 +64,30 @@
 								<td width="10%" align="center" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">修改</td>
 								<td width="10%" align="center" height=22 background="${pageContext.request.contextPath }/images/tablehead.jpg">下载</td>
 							</tr>
+							<s:if test="#request.list!=null && #request.list.size()>0">
+								<s:iterator value="#request.list" var="template">
 									<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
 										<td style="HEIGHT:22px" align="center" width="35%">
-											设备购置计划模板
+											<s:property value="#template.name"/>
 										</td>
 										<td style="HEIGHT:22px" align="center" width="35%">
-											设备购置计划流程
+											<s:property value="#template.processDefinitionKey"/>
 										</td>
 										<td style="HEIGHT:22px" align="center" width="10%">
-											<a href="elecApplicationTemplateAction_delete.do?id=1" onclick="return returnMethod()">
+											<a href="elecApplicationTemplateAction_delete.do?id=<s:property value="#template.id"/>" onclick="return returnMethod('<s:property value="#template.name"/>')">
 											<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="CURSOR:hand"></a>												
 										</td>
 										<td style="HEIGHT:22px" align="center" width="10%">
-											<a href="#" onclick="openWindow('${pageContext.request.contextPath }/workflow/applicationTemplateEdit.jsp?id=1','700','400');">
+											<a href="#" onclick="openWindow('${pageContext.request.contextPath }/workflow/elecApplicationTemplateAction_edit.do?id=<s:property value="#template.id"/>','700','400');">
 											<img src="${pageContext.request.contextPath }/images/edit.gif" width="16" height="16" border="0" style="CURSOR:hand"></a>												
 										</td>
 										<td style="HEIGHT:22px" align="center" width="10%">
-											<a href="#" onclick="openWindow('${pageContext.request.contextPath }/workflow/elecApplicationTemplateAction_download.do?id=1','700','400');">
+											<a href="#" onclick="openWindow('${pageContext.request.contextPath }/workflow/elecApplicationTemplateAction_download.do?id=<s:property value="#template.id"/>','700','400');">
 										    <img src="${pageContext.request.contextPath }/images/attach.gif" border="0" style="CURSOR:hand"></a>													
 										</td>
 									</tr>
-								
-									<tr onmouseover="this.style.backgroundColor = 'white'" onmouseout="this.style.backgroundColor = '#F5FAFE';">
-										<td style="HEIGHT:22px" align="center" width="35%">
-											设备费用报销模板
-										</td>
-										<td style="HEIGHT:22px" align="center" width="35%">
-											设备费用报销流程
-										</td>
-										<td style="HEIGHT:22px" align="center" width="10%">
-											<a href="elecApplicationTemplateAction_delete.do?id=2" onclick="return returnMethod()">
-											<img src="${pageContext.request.contextPath }/images/delete.gif" width="16" height="16" border="0" style="CURSOR:hand"></a>												
-										</td>
-										<td style="HEIGHT:22px" align="center" width="10%">
-											<a href="#" onclick="openWindow('${pageContext.request.contextPath }/workflow/applicationTemplateEdit.jsp?id=2','700','400');">
-											<img src="${pageContext.request.contextPath }/images/edit.gif" width="16" height="16" border="0" style="CURSOR:hand"></a>												
-										</td>
-										<td style="HEIGHT:22px" align="center" width="10%">
-											<a href="#" onclick="openWindow('${pageContext.request.contextPath }/workflow/elecApplicationTemplateAction_download.do?id=2','700','400');">
-										    <img src="${pageContext.request.contextPath }/images/attach.gif" border="0" style="CURSOR:hand"></a>													
-										</td>
-									</tr>
+								</s:iterator>
+							</s:if>
 						</table>		
 					</td>
 				</tr>     

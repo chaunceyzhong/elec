@@ -90,5 +90,21 @@
                 <param name="bufferSize">1024</param>
             </result>
         </action>
+        <!-- 申请模板管理 -->
+        <action name="elecApplicationTemplateAction_*" class="elecApplicationTemplateAction" method="{1}">
+            <result name="home">/WEB-INF/page/workflow/applicationTemplateList.jsp</result>
+            <result name="add">/WEB-INF/page/workflow/applicationTemplateAdd.jsp</result>
+            <result name="edit">/WEB-INF/page/workflow/applicationTemplateEdit.jsp</result>
+            <result name="delete" type="redirectAction">
+                <param name="actionName">elecApplicationTemplateAction_home.do</param>
+            </result>
+            <result name="download" type="stream">
+                <param name="contentType">application/msword</param>
+                <!--使用inputName输出值栈中流的值-->
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${#request.filename}.doc"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
     </package>
 </struts>

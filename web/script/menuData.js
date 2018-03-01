@@ -162,7 +162,7 @@ var privilegeDate = [{
 			pid:'ar',
 			name:'申请模板管理',
 			target:'mainFrame',
-			url:'../workflow/applicationTemplateList.jsp',
+			url:'../workflow/elecApplicationTemplateAction_home.do',
 			icon:'../images/MenuIcon/shenqingmobanguanli.gif',
 			isParent:false
 		},{

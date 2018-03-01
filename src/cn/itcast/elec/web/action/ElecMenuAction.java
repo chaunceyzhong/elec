@@ -6,7 +6,6 @@ import cn.itcast.elec.domain.ElecUser;
 import cn.itcast.elec.service.IElecCommonMsgService;
 import cn.itcast.elec.service.IElecUserService;
 import cn.itcast.elec.util.LogonUtils;
-import cn.itcast.elec.util.MD5keyBean;
 import cn.itcast.elec.util.ValueStackUtils;
 import cn.itcast.elec.web.form.MenuForm;
 import org.apache.commons.lang.StringUtils;
@@ -37,11 +36,11 @@ public class ElecMenuAction extends BaseAction<MenuForm> {
     public String menuHome(){
 
         //添加验证码
-        boolean flag = LogonUtils.checkNumber(request);
+      /*  boolean flag = LogonUtils.checkNumber(request);
         if(!flag){
             this.addFieldError("error", "验证码有误！");
             return "error";
-        }
+        }*/
         //1.验证登录密码是否正确
         String name = menuForm.getName();
         String password = menuForm.getPassword();
@@ -51,7 +50,7 @@ public class ElecMenuAction extends BaseAction<MenuForm> {
             this.addFieldError("error", "登录名有误！");
             return "error";
         }
-        if(StringUtils.isBlank(password)){
+        /*if(StringUtils.isBlank(password)){
             this.addFieldError("error", "密码不能为空！");
             return "error";
         }else {
@@ -63,7 +62,7 @@ public class ElecMenuAction extends BaseAction<MenuForm> {
                 this.addFieldError("error", "密码有误！");
                 return "error";
             }
-        }
+        }*/
         //3.查看该用户是否具备角色
         Set<ElecRole> elecRoles = elecUser.getElecRoles();
         Hashtable<String,String> ht = new Hashtable<>();

@@ -29,4 +29,6 @@ public interface IElecUserService {
      * @return
      */
     String findPopedomByLogonName(String name);
+
+    List<ElecUser> findElecUserByPostID(String postID);
 }

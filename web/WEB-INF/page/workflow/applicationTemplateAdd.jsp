@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8"%>
+<%@taglib uri="/struts-tags" prefix="s"%>
 <html>
 <head>
 	<title>新增申请模板</title>
@@ -34,7 +35,7 @@
 	</script>
 </head>
 <body>
-		<form name="Form1" action="workflow/elecApplicationTemplateAction_save.do" method="post" enctype="multipart/form-data">
+		<form name="Form1" action="${pageContext.request.contextPath }/workflow/elecApplicationTemplateAction_save.do" method="post" enctype="multipart/form-data">
 			<br>
 			<table border="0" width="100%" cellspacing="0" cellpadding="0">
 				<tr>
@@ -61,24 +62,24 @@
 				<tr>
 					<td align="center" bgColor="#f5fafe" class="ta_01">模板名称：<font color="#FF0000">*</font></td>
 			        <td class="ta_01" bgColor="#ffffff" colspan="3">
-			        	<input type="text" name="name" size="20" value="" id="name"/>
+			        	<s:textfield name="name" id="name" size="20"></s:textfield>
 			        </td>
 				</tr>
 				<tr>
 					<td width="18%" align="center" bgColor="#f5fafe" class="ta_01">流程定义的Key值：<font color="#FF0000">*</font></td>
 			        <td class="ta_01" bgColor="#ffffff" colspan="3">
-			         	<select name="processDefinitionKey" id="processDefinitionKey" style="width:155px">
-						    <option value=""></option>
-						    <option value="设备购置计划流程">设备购置计划流程</option>
-						    <option value="设备费用报销流程">设备费用报销流程</option>
-						</select>
+			        	<s:select list="#request.pdList" name="processDefinitionKey" id="processDefinitionKey"
+			        			  listKey="key" listValue="key"
+			        			  headerKey="" headerValue=""
+			        			  cssStyle="width:155px">
+			        	</s:select>
 	            	</td>
 				</tr>
 				
 				<tr>
 					<td align="center" bgColor="#f5fafe" class="ta_01">请选择模板文件(doc格式)：<font color="#FF0000">*</font></td>
 			        <td class="ta_01" bgColor="#ffffff" colspan="3">
-			        	<input type="file" name="upload" id="upload" style="width:450px;" /> 
+			        	<s:file name="upload" id="upload" cssStyle="width:450px;"></s:file>
 			        </td>
 				</tr>
 				<tr height=50>
@@ -93,7 +94,7 @@
 				</tr>
 				<tr>
 					<td align="center" colspan=4>
-						<input type="button" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height=22;width=55"   onClick="saveTemplate()">
+						<input type="button" name="BT_Submit" value="保存"  style="font-size:12px; color:black; height:22px;width:55px"   onClick="saveTemplate()">
 						<INPUT type="button" name="Reset1" id="save" value="关闭"
 							onClick="opener.location.reload(); window.close();"
 							style="width: 60px; font-size: 12px; color: black;">
@@ -104,4 +105,3 @@
 
 </body>
 </html>
-	

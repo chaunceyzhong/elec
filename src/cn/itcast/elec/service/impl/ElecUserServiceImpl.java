@@ -203,6 +203,16 @@ public class ElecUserServiceImpl implements IElecUserService {
         return buffer.toString();
     }
 
+    public List<ElecUser> findElecUserByPostID(String postID) {
+        //查询条件
+        String condition = " and o.postID = ?";
+        Object [] params = {postID};
+        //排序
+        Map<String, String> orderby = new LinkedHashMap<>();
+        orderby.put("o.onDutyDate", "asc");
+        List<ElecUser> list = elecUserDao.findCollectionByConditionNoPage(condition, params, orderby);
+        return list;
+    }
 
 
 }
